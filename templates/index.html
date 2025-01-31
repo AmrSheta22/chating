@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Chat</title>
+    <script>
+        function fetchMessage() {
+            fetch('/get_message')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('incoming').innerText = data.body;
+                });
+        }
+
+        function sendMessage() {
+            const replyText = document.getElementById('reply').value;
+            fetch('/send_message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ reply: replyText })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert("Message sent!");
+                    document.getElementById('reply').value = "";
+                } else {
+                    alert("Error sending message.");
+                }
+            });
+        }
+
+        setInterval(fetchMessage, 5000);  // Refresh every 5 seconds
+    </script>
+</head>
+<body>
+    <h2>WhatsApp Chat</h2>
+    <p><strong>Incoming Message:</strong></p>
+    <p id="incoming">Waiting for messages...</p>
+
+    <input type="text" id="reply" placeholder="Type your reply">
+    <button onclick="sendMessage()">Send</button>
+</body>
+</html>
