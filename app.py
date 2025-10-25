@@ -3,12 +3,12 @@ import time
 from flask import Flask, render_template, request, jsonify
 
 # Twilio credentials (replace with your actual credentials)
-TWILIO_ACCOUNT_SID = "AC33e442b377fd63f21d97b017490e19ed"
-TWILIO_AUTH_TOKEN = "77cd0f2a3020a68e5a5838c7f17266e7"
-TWILIO_WHATSAPP_NUMBER = "whatsapp:+14155238886"
+TWILIO_ACCOUNT_SID = "Your Twilio account SID"
+TWILIO_AUTH_TOKEN = "Auth Key"
+TWILIO_WHATSAPP_NUMBER = "whatsapp:+14XXXXXXXX"
 
 # The specific number you want to allow
-ALLOWED_SENDER = "whatsapp:+201282662987"
+ALLOWED_SENDER = "whatsapp:+2012XXXXXXX"
 
 
 app = Flask(__name__)
@@ -60,3 +60,4 @@ def send_message():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
